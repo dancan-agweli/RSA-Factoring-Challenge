@@ -4,18 +4,20 @@ from sys import argv
 
 
 def factorize(data):
-
-    x = 3-1
+    x = 2
 
     if data < 2:
         return
     print()
     print(data, "data")
-    if data % x:
+    while x <= data:
+        if data % x == 0:
+            print("{:.0f}={:.0f}*{:.0f}".format(data, data / x, x))
+            break
         x += 1
-    print("{:.0f}={:.0f}*{:.0f}".format(data, data / x, x))
     print(data, "data")
     print()
+
 
 if len(argv) != 2:
     exit()
@@ -25,9 +27,10 @@ try:
         size = file.readline()
 
         while size != "":
-            data = int(line.split('\n')[0])
+            data = int(size.split('\n')[0])
             factorize(data)
 
             size = file.readline()
-except:
-    pass
+except FileNotFoundError:
+    print("File not found.")
+
