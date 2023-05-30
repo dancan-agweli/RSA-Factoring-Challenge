@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+
+import sys
+
+
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
+
+
+def factorize(data):
+    if is_prime(data):
+        print("{}={}*{}".format(data, data, 1))
+        return
+
+    x = 2
+    while x * x <= data:
+        if data % x == 0 and is_prime(x):
+            y = data // x
+            if is_prime(y):
+                print("{}={}*{}".format(data, y, x))
+                return
+        x += 1
+
+    print("Unable to factorize the number {}".format(data))
+
+
+if len(sys.argv) != 2:
+    sys.exit("Usage: rsa <file>")
+
+try:
+    with open(sys.argv[1]) as file:
+        data = int(file.readline().strip())
+        factorize(data)
+except FileNotFoundError:
+    sys.exit("File not found.")
+
