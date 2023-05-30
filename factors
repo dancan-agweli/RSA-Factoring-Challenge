@@ -8,15 +8,12 @@ def factorize(data):
 
     if data < 2:
         return
-    print()
-    print(data, "data")
+
     while x <= data:
         if data % x == 0:
-            print("{:.0f}={:.0f}*{:.0f}".format(data, data / x, x))
+            print("{}={}*{}".format(data, data // x, x))
             break
         x += 1
-    print(data, "data")
-    print()
 
 
 if len(argv) != 2:
@@ -24,13 +21,10 @@ if len(argv) != 2:
 
 try:
     with open(argv[1]) as file:
-        size = file.readline()
-
-        while size != "":
-            data = int(size.split('\n')[0])
+        for line in file:
+            data = int(line.strip())
             factorize(data)
-
-            size = file.readline()
 except FileNotFoundError:
     print("File not found.")
+
 
